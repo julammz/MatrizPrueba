@@ -9,11 +9,6 @@ public class Matriz {
         this.valoresMatriz = new int[dimensiones][dimensiones][dimensiones];
     }
 
-    /*public void crearMatriz(int dimensiones, int operaciones) {
-        this.valoresMatriz = new int[dimensiones][dimensiones][dimensiones];
-        this.estructuraMatriz = new EstructuraMatriz(dimensiones, operaciones);
-    }*/
-
     public void iniciarMatriz(int dimensiones) {
 
         for(int i=0;i<dimensiones;i++){

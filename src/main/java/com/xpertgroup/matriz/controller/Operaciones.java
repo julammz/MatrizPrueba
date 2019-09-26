@@ -12,8 +12,8 @@ public class Operaciones {
     private Matriz matriz;
     private Resultados resultadoMatriz;
     private EstructuraMatriz estructuraMatriz;
-    private int operacionesEjecutadas = 0;
-    private int iteracionesEjecutadas = 0;
+    private int operacionesEjecutadas = 1;
+    private int iteracionesEjecutadas = 1;
 
 
 
@@ -33,30 +33,29 @@ public class Operaciones {
 
         int[] parametros = this.procesarEntrada(entrada);
 
+        opcion = parametros.length;
+        System.out.println("Opcion que ejecuta: " + opcion);
+
 
         if(iteraciones.getIteraciones()==0){
             iteraciones.setIteraciones(parametros[0]);
             System.out.println("Iteraciones: " + parametros[0]);
             return;
         }
-        else if(this.operacionesEjecutadas>this.estructuraMatriz.getOperaciones()&&this.estructuraMatriz.getOperaciones()!=0) {
-            System.out.println("Terminaron las operaciones");
-            iteracionesTemp = this.iteraciones.getIteraciones()+1;
-            this.iteraciones.setIteraciones(iteracionesTemp);
-            return;
-            //this.resultadoMatriz.setContinua(false);
-        }
         else if(this.iteracionesEjecutadas>this.iteraciones.getIteraciones()&&this.iteraciones.getIteraciones()!=0) {
             this.iteraciones.setTerminoOperaciones(true);
+            return;
+        }
+        else if(this.operacionesEjecutadas>this.estructuraMatriz.getOperaciones()&&this.estructuraMatriz.getOperaciones()!=0&&opcion!=2) {
+            System.out.println("Terminaron las operaciones");
+            this.iteracionesEjecutadas++;
+            this.operacionesEjecutadas=0;
+            return;
         }
 
-        opcion = parametros.length;
-        System.out.println("Opcion que ejecuta: " + opcion);
 
         switch(opcion){
             case 2:
-                this.iteracionesEjecutadas++;
-                this.operacionesEjecutadas=0;
                 this.matriz = new Matriz(parametros[0]);
                 this.matriz.iniciarMatriz(parametros[0]);
                 this.estructuraMatriz.setOperaciones(parametros[1]);
