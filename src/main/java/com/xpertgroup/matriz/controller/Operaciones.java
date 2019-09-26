@@ -1,6 +1,7 @@
 package com.xpertgroup.matriz.controller;
 
 
+import com.xpertgroup.matriz.model.EstructuraMatriz;
 import com.xpertgroup.matriz.model.Iteraciones;
 import com.xpertgroup.matriz.model.Matriz;
 import com.xpertgroup.matriz.model.Resultados;
@@ -10,13 +11,15 @@ public class Operaciones {
     private Iteraciones iteraciones;
     private Matriz matriz;
     private Resultados resultadoMatriz;
+    private EstructuraMatriz estructuraMatriz;
     private int operacionesEjecutadas = 0;
     private int iteracionesEjecutadas = 0;
 
 
 
-    public Operaciones(Iteraciones iteraciones, Matriz matriz, Resultados resultadoMatriz) {
+    public Operaciones(Iteraciones iteraciones, EstructuraMatriz estructuraMatriz, Matriz matriz, Resultados resultadoMatriz) {
         this.iteraciones = iteraciones;
+        this.estructuraMatriz = estructuraMatriz;
         this.matriz = matriz;
         this.resultadoMatriz = resultadoMatriz;
     }
@@ -25,7 +28,8 @@ public class Operaciones {
 
         int opcion;
         int resultadoTemp;
-        String textoTemp;
+        int iteracionesTemp = 0;
+        String textoTemp = "";
 
         int[] parametros = this.procesarEntrada(entrada);
 
@@ -35,13 +39,15 @@ public class Operaciones {
             System.out.println("Iteraciones: " + parametros[0]);
             return;
         }
-        else if(this.operacionesEjecutadas>this.matriz.getOperaciones()) {
+        else if(this.operacionesEjecutadas>this.estructuraMatriz.getOperaciones()&&this.estructuraMatriz.getOperaciones()!=0) {
             System.out.println("Terminaron las operaciones");
+            iteracionesTemp = this.iteraciones.getIteraciones()+1;
+            this.iteraciones.setIteraciones(iteracionesTemp);
             return;
             //this.resultadoMatriz.setContinua(false);
         }
-        else if(this.iteracionesEjecutadas>this.iteraciones.getIteraciones()) {
-            this.resultadoMatriz.setContinua(false);
+        else if(this.iteracionesEjecutadas>this.iteraciones.getIteraciones()&&this.iteraciones.getIteraciones()!=0) {
+            this.iteraciones.setTerminoOperaciones(true);
         }
 
         opcion = parametros.length;
@@ -51,8 +57,9 @@ public class Operaciones {
             case 2:
                 this.iteracionesEjecutadas++;
                 this.operacionesEjecutadas=0;
-                this.matriz = new Matriz(parametros[0],parametros[1]);
-                this.matriz.iniciarMatriz();
+                this.matriz = new Matriz(parametros[0]);
+                this.matriz.iniciarMatriz(parametros[0]);
+                this.estructuraMatriz.setOperaciones(parametros[1]);
                 System.out.println("Se crea matriz:" + parametros[0] + " " + parametros[1]);
                 break;
 
@@ -64,7 +71,7 @@ public class Operaciones {
 
             case 6:
                 resultadoTemp = this.QueryMatriz(this.matriz, parametros[0],parametros[1],parametros[2],parametros[3],parametros[4],parametros[5]);
-                textoTemp = this.resultadoMatriz.getResultado() + "<br>" + resultadoTemp;
+                textoTemp = this.resultadoMatriz.getResultado() + " <br> " + resultadoTemp;
                 this.resultadoMatriz.setResultado(textoTemp);
                 this.operacionesEjecutadas++;
                 System.out.println("Ejecuta consulta matriz:" + parametros[0] + " " + parametros[1] + " " + parametros[2] + " " + parametros[3] + " " + parametros[4] + " " + parametros[5]);

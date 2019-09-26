@@ -1,26 +1,24 @@
 package com.xpertgroup.matriz.model;
 
-public class Matriz extends EstructuraMatriz {
+public class Matriz {
 
-    private EstructuraMatriz estructuraMatriz;
     private int[][][] valoresMatriz;
 
-    public Matriz(int dimensiones, int operaciones) {
+    public Matriz(int dimensiones) {
         super();
         this.valoresMatriz = new int[dimensiones][dimensiones][dimensiones];
-        this.estructuraMatriz = new EstructuraMatriz(dimensiones, operaciones);
     }
 
-    public void crearMatriz(int dimensiones, int operaciones) {
+    /*public void crearMatriz(int dimensiones, int operaciones) {
         this.valoresMatriz = new int[dimensiones][dimensiones][dimensiones];
         this.estructuraMatriz = new EstructuraMatriz(dimensiones, operaciones);
-    }
+    }*/
 
-    public void iniciarMatriz() {
+    public void iniciarMatriz(int dimensiones) {
 
-        for(int i=0;i<this.estructuraMatriz.getDimensiones();i++){
-            for(int j=0;j<this.estructuraMatriz.getDimensiones();j++){
-                for(int k=0;k<this.estructuraMatriz.getDimensiones();k++){
+        for(int i=0;i<dimensiones;i++){
+            for(int j=0;j<dimensiones;j++){
+                for(int k=0;k<dimensiones;k++){
                     this.setMatriz(i,j,k,0);
                 }
             }
