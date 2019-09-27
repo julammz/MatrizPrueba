@@ -1,6 +1,6 @@
 package com.xpertgroup.matriz.controller;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import com.xpertgroup.matriz.model.EstructuraMatriz;
 import com.xpertgroup.matriz.model.Iteraciones;
 import com.xpertgroup.matriz.model.Matriz;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
+
 
 
 @Controller

@@ -10,7 +10,6 @@ public class Matriz {
     }
 
     public void iniciarMatriz(int dimensiones) {
-
         for(int i=0;i<dimensiones;i++){
             for(int j=0;j<dimensiones;j++){
                 for(int k=0;k<dimensiones;k++){
@@ -18,7 +17,6 @@ public class Matriz {
                 }
             }
         }
-
     }
 
     public int[][][] getValoresMatriz() {
